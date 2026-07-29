@@ -60,87 +60,38 @@ $conn->close();
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/navbar.php'; ?>
-<div class="dashboard-container">
+
+<div class="container section">
     <?php if ($success): ?>
-        <div class="confirmation-card">
-            <h1>🎉 Booking Confirmed!</h1>
+        <div class="card confirmation-card">
+            <div class="confirmation-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+            </div>
+            <h1>Booking Confirmed!</h1>
             <p>Thank you, <strong><?= htmlspecialchars($_SESSION['name']); ?></strong>! Your booking has been successfully recorded.</p>
-            
-            <h2>Booking Details:</h2>
-            <ul>
+
+            <h3 class="text-center mt-2">Booking Details</h3>
+            <ul class="confirmation-list">
                 <li><strong>Car:</strong> <?= htmlspecialchars($car['make'] . ' ' . $car['model']); ?> (<?= htmlspecialchars($car['year']); ?>)</li>
                 <li><strong>Registration No:</strong> <?= htmlspecialchars($car['carreg']); ?></li>
                 <li><strong>Type:</strong> <?= ucfirst(htmlspecialchars($car['type'])); ?></li>
                 <li><strong>Start Date:</strong> <?= htmlspecialchars($start_date); ?></li>
                 <li><strong>End Date:</strong> <?= htmlspecialchars($end_date); ?></li>
                 <li><strong>Days:</strong> <?= $days; ?> day(s)</li>
-                <li><strong>Total Fare:</strong> <?= number_format($total_fare, 2); ?> PKR</li>
+                <li><strong>Total Fare:</strong> <span class="mono" style="color:var(--accent); font-weight:700;"><?= number_format($total_fare, 2); ?> PKR</span></li>
             </ul>
 
             <p>We hope you enjoy your ride! Please visit <a href="../../frontend/customer/dashboard.php">your dashboard</a> for more bookings.</p>
         </div>
     <?php else: ?>
-        <div class="confirmation-card error">
-            <h1>❌ Booking Failed</h1>
+        <div class="card confirmation-card error">
+            <div class="confirmation-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            </div>
+            <h1>Booking Failed</h1>
             <p>Sorry, something went wrong. Please try again later.</p>
         </div>
     <?php endif; ?>
 </div>
-
-<style>
-.dashboard-container {
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 20px;
-    font-family: 'Lato', sans-serif;
-}
-
-.confirmation-card {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.confirmation-card.error {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-.confirmation-card h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 28px;
-    color: #228B22;
-    margin-bottom: 20px;
-}
-
-.confirmation-card ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.confirmation-card ul li {
-    margin-bottom: 8px;
-    font-size: 16px;
-}
-
-.confirmation-card p {
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.confirmation-card a {
-    color: #228B22;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.confirmation-card a:hover {
-    text-decoration: underline;
-}
-</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>

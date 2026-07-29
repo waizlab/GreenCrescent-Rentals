@@ -37,113 +37,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
 
-<div class="form-container">
-    <h2>Login</h2>
+<div class="container section">
+    <div class="card form-card">
+        <h1 class="text-center mb-2">Login</h1>
 
-    <?php if(!empty($error)): ?>
-        <div class="error-msg"><?php echo htmlspecialchars($error); ?></div>
-    <?php endif; ?>
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-error"><span class="led led-alert"></span><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
 
-    <form method="POST" action="">
-        <label>Email</label>
-        <input type="email" name="email" placeholder="Enter your email" required>
+        <form method="POST" action="" class="form-wide">
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
 
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Enter your password" required>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+                Login
+            </button>
+        </form>
 
-        <button type="submit">Login</button>
-    </form>
-
-    <div class="redirect-msg">
-        Don't have an account? <a href="register.php">Register</a>
+        <p class="text-center text-muted mt-2" style="font-size:0.875rem;">
+            Don't have an account? <a href="register.php">Register</a>
+        </p>
     </div>
 </div>
-
-<style>
-/* Form container */
-.form-container {
-    width: 90%;
-    max-width: 400px;
-    margin: 5vh auto;
-    padding: 25px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    font-family: 'Lato', sans-serif;
-}
-
-/* Heading */
-.form-container h2 {
-    text-align: center;
-    color: #228B22;
-    margin-bottom: 25px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-/* Labels */
-.form-container label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-/* Inputs */
-.form-container input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border: 1px solid #B2BEB5;
-    border-radius: 6px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-/* Button */
-.form-container button {
-    width: 100%;
-    background: #228B22;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-    transition: background 0.3s;
-}
-
-.form-container button:hover {
-    background: #2C3E50;
-}
-
-/* Error messages */
-.error-msg {
-    color: #e74c3c;
-    text-align: center;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-/* Redirect text */
-.redirect-msg {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-.redirect-msg a {
-    color: #228B22;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* Responsive */
-@media screen and (max-width: 480px) {
-    .form-container {
-        padding: 20px;
-    }
-}
-</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>

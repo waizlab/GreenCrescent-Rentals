@@ -1,27 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Customer Registration</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration — GreenCrescent Rentals</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<header class="site-header">
+    <div class="logo-group">
+        <img src="../images/logo.png" alt="GreenCrescent Rentals logo">
+        <h1>GreenCrescent Rentals</h1>
+    </div>
+</header>
 
-<h2>Customer Registration</h2>
+<div class="container section">
+    <h1 class="text-center mb-2">Customer Registration</h1>
 
-<form method="POST" action="../../backend/users/register.php">
-    <label>Name:</label><br>
-    <input type="text" name="name" required><br><br>
+    <div class="card form-card">
+        <form method="POST" action="../../backend/users/register.php">
+            <div class="field">
+                <label>Name</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="field">
+                <label>Phone Number</label>
+                <input type="text" name="phoneno" placeholder="11-digit number" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+                Register
+            </button>
+        </form>
+        <p class="text-center text-muted mt-2" style="font-size:0.875rem;">
+            Already have an account? <a href="../../backend/users/login.php">Log in</a>
+        </p>
+    </div>
+</div>
 
-    <label>Phone Number:</label><br>
-    <input type="text" name="phoneno" placeholder="11-digit number" required><br><br>
-
-    <label>Password:</label><br>
-    <input type="password" name="password" required><br><br>
-
-    <button type="submit">Register</button>
-</form>
-
+<footer id="site-footer">
+    <div class="container">&copy; 2026 GreenCrescent Rentals — Developed by Muhammad Waiz, Computer Science Undergraduate, Bahria University</div>
+</footer>
 </body>
 </html>

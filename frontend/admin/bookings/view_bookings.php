@@ -9,12 +9,11 @@ $bookings = $conn->query("SELECT * FROM booking_summary");
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/admin/common/navbar.php'; ?>
 
+<div class="container section">
+    <h1 class="text-center mb-2">All Bookings</h1>
 
-<div class="dashboard-container">
-    <h1>All Bookings</h1>
-
-    <div class="bookings-table-container">
-        <table class="bookings-table">
+    <div class="table-wrap">
+        <table>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -30,34 +29,38 @@ $bookings = $conn->query("SELECT * FROM booking_summary");
             </thead>
             <tbody>
             <?php while($b = $bookings->fetch_assoc()): ?>
+                <?php
+                    $badgeClass = match($b['status']) {
+                        'pending' => 'badge-warning',
+                        'confirmed' => 'badge-info',
+                        'completed' => 'badge-success',
+                        'cancelled' => 'badge-alert',
+                        default => ''
+                    };
+                ?>
                 <tr>
-                    <td><?php echo $b['booking_id']; ?></td>
+                    <td class="mono"><?php echo $b['booking_id']; ?></td>
                     <td><?php echo htmlspecialchars($b['customer_name']); ?></td>
                     <td><?php echo htmlspecialchars($b['email']); ?></td>
                     <td><?php echo htmlspecialchars($b['carreg'].' | '.$b['make'].' '.$b['model']); ?></td>
-                    <td><?php echo $b['start_date']; ?></td>
-                    <td><?php echo $b['end_date']; ?></td>
-                    <td><?php echo number_format($b['total_fare']); ?> PKR</td>
-                    <td>
-                        <?php 
-                        $statusColor = match($b['status']) {
-                            'pending' => '#f39c12',
-                            'confirmed' => '#2980b9',
-                            'completed' => '#27ae60',
-                            'cancelled' => '#c0392b',
-                            default => '#7f8c8d'
-                        };
-                        ?>
-                        <span class="status-label" style="background:<?php echo $statusColor; ?>;">
-                            <?php echo ucfirst($b['status']); ?>
-                        </span>
-                    </td>
-                    <td>
+                    <td class="mono"><?php echo $b['start_date']; ?></td>
+                    <td class="mono"><?php echo $b['end_date']; ?></td>
+                    <td class="mono"><?php echo number_format($b['total_fare']); ?> PKR</td>
+                    <td><span class="badge <?php echo $badgeClass; ?>"><?php echo ucfirst($b['status']); ?></span></td>
+                    <td class="flex gap-1" style="justify-content:center;">
                         <?php if($b['status'] === 'pending'): ?>
-                            <a href="update_booking.php?bid=<?php echo $b['booking_id']; ?>&action=confirm" class="action-btn confirm" title="Confirm Booking">✔️</a>
-                            <a href="update_booking.php?bid=<?php echo $b['booking_id']; ?>&action=cancel" class="action-btn cancel" title="Cancel Booking">❌</a>
+                            <a href="update_booking.php?bid=<?php echo $b['booking_id']; ?>&action=confirm" class="btn btn-ghost btn-inline" title="Confirm Booking" style="padding:6px; color:var(--status-online);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+                            </a>
+                            <a href="update_booking.php?bid=<?php echo $b['booking_id']; ?>&action=cancel" class="btn btn-ghost btn-inline" title="Cancel Booking" style="padding:6px; color:var(--status-alert);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                            </a>
                         <?php elseif($b['status'] === 'confirmed'): ?>
-                            <a href="update_booking.php?bid=<?php echo $b['booking_id']; ?>&action=complete" class="action-btn complete" title="Mark Complete">✅</a>
+                            <a href="update_booking.php?bid=<?php echo $b['booking_id']; ?>&action=complete" class="btn btn-ghost btn-inline" title="Mark Complete" style="padding:6px; color:var(--status-online);">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+                            </a>
+                        <?php else: ?>
+                            <span class="text-muted mono">N/A</span>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -66,78 +69,5 @@ $bookings = $conn->query("SELECT * FROM booking_summary");
         </table>
     </div>
 </div>
-
-<style>
-.dashboard-container {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 20px;
-    font-family: 'Lato', sans-serif;
-}
-
-.dashboard-container h1 {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 32px;
-    color: #228B22;
-    margin-bottom: 30px;
-}
-
-.bookings-table-container {
-    overflow-x: auto;
-}
-
-.bookings-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #F5FFFA;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-}
-
-.bookings-table th, .bookings-table td {
-    padding: 12px 15px;
-    text-align: center;
-}
-
-.bookings-table th {
-    background: #228B22;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.bookings-table tr:nth-child(even) {
-    background: #eafaf1;
-}
-
-.status-label {
-    display: inline-block;
-    padding: 5px 10px;
-    color: white;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-.action-btn {
-    display: inline-block;
-    margin: 0 3px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    transition: transform 0.2s;
-}
-
-.action-btn.confirm { background: #2980b9; }
-.action-btn.cancel { background: #c0392b; }
-.action-btn.complete { background: #27ae60; }
-
-.action-btn:hover {
-    transform: scale(1.1);
-}
-</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>

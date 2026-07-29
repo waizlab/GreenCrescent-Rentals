@@ -15,7 +15,7 @@ CREATE TABLE users (
 
 -- Hardcoded admin
 INSERT INTO users (name, email, password, role) VALUES
-('admin', 'admin@greencrescent.com', 'admin321', 'admin');
+('Waiz', 'admin@greencrescent.com', 'admin321', 'admin');
 
 -- Cars table
 CREATE TABLE cars (
@@ -30,12 +30,6 @@ CREATE TABLE cars (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Sample cars
-INSERT INTO cars (carreg, make, model, year, type, availability, image) VALUES
-('ABC-123','Toyota', 'Corolla', 2020, 'sedan', 'available', 'images/corolla.jpg'),
-('BEF-567','Honda', 'Civic', 2019, 'sedan', 'available', 'images/civic.jpg'),
-('BHI-901','Suzuki', 'Swift', 2021, 'hatchback', 'available', 'images/swift.jpg');
-
 -- Rental fares table
 CREATE TABLE rental_fares (
     rid INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,12 +37,6 @@ CREATE TABLE rental_fares (
     price_per_day INT NOT NULL,
     FOREIGN KEY (car_id) REFERENCES cars(cid) ON DELETE CASCADE
 );
-
--- Sample fares
-INSERT INTO rental_fares (car_id, price_per_day) VALUES
-(1, 3000),
-(2, 5500),
-(3, 2500);
 
 -- Bookings table
 CREATE TABLE bookings (
@@ -64,18 +52,6 @@ CREATE TABLE bookings (
     FOREIGN KEY (car_id) REFERENCES cars(cid) ON DELETE CASCADE
 );
 
--- Trigger: Calculate total fare automatically
--- #/DELIMITER $$
--- #CREATE TRIGGER calc_total_fare BEFORE INSERT ON bookings
--- #FOR EACH ROW
--- BEGIN
---     DECLARE price_per_day INT;
---     SET price_per_day = (SELECT price_per_day FROM rental_fares WHERE car_id = NEW.car_id);
---     SET NEW.total_fare = price_per_day * DATEDIFF(NEW.end_date, NEW.start_date);
--- END$$
--- DELIMITER ;
-
--- Trigger: Update car availability to booked after new booking
 DELIMITER $$
 CREATE TRIGGER after_booking_insert
 AFTER INSERT ON bookings

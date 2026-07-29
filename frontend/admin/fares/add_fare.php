@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: manage_fares.php");
         exit;
     } else {
-        $error = "⚠️ Select a car and enter a valid price.";
+        $error = "Select a car and enter a valid price.";
     }
 }
 
@@ -47,115 +47,43 @@ $cars = $conn->query("SELECT cid, make, model FROM cars");
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/admin/common/navbar.php'; ?>
-<div class="dashboard-container">
-    <h1><?= $edit_id ? 'Edit' : 'Add' ?> Rental Fare</h1>
 
-    <div class="form-container">
+<div class="container section">
+    <h1 class="text-center mb-2"><?= $edit_id ? 'Edit' : 'Add' ?> Rental Fare</h1>
+
+    <div class="card form-card">
         <?php if($error): ?>
-            <div class="form-alert error"><?= htmlspecialchars($error) ?></div>
+            <div class="alert alert-error"><span class="led led-alert"></span><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
 
-        <form method="post">
-            <label>Car <span>🚗</span></label>
-            <select name="car_id" required>
-                <option value="">Select Car</option>
-                <?php while($car = $cars->fetch_assoc()): ?>
-                    <option value="<?= $car['cid'] ?>" <?= ($car['cid']==$edit_car_id)?'selected':'' ?>>
-                        <?= htmlspecialchars($car['make']) ?> <?= htmlspecialchars($car['model']) ?>
-                    </option>
-                <?php endwhile; ?>
-            </select>
+        <form method="post" class="form-wide">
+            <div class="field">
+                <label>Car</label>
+                <select name="car_id" required>
+                    <option value="">Select Car</option>
+                    <?php while($car = $cars->fetch_assoc()): ?>
+                        <option value="<?= $car['cid'] ?>" <?= ($car['cid']==$edit_car_id)?'selected':'' ?>>
+                            <?= htmlspecialchars($car['make']) ?> <?= htmlspecialchars($car['model']) ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            <div class="field">
+                <label>Price per Day (PKR)</label>
+                <input type="number" name="price_per_day" value="<?= $edit_price ?>" placeholder="Enter price in PKR" required>
+            </div>
 
-            <label>Price per Day <span>💰</span></label>
-            <input type="number" name="price_per_day" value="<?= $edit_price ?>" placeholder="Enter price in PKR" required>
-
-            <button type="submit"><?= $edit_id ? '✏️ Update' : '➕ Add' ?> Fare</button>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+                <?php if ($edit_id): ?>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+                    Update Fare
+                <?php else: ?>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    Add Fare
+                <?php endif; ?>
+            </button>
         </form>
     </div>
 </div>
-
-<style>
-.dashboard-container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 20px;
-    font-family: 'Lato', sans-serif;
-}
-
-.dashboard-container h1 {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 28px;
-    color: #228B22;
-    margin-bottom: 25px;
-}
-
-.form-container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
-
-.form-container label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: 14px;
-    color: #2E2E2E;
-}
-
-.form-container label span {
-    margin-left: 6px;
-}
-
-.form-container input,
-.form-container select {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    border: 1px solid #B2BEB5;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: border 0.3s;
-}
-
-.form-container input:focus,
-.form-container select:focus {
-    border-color: #228B22;
-    outline: none;
-}
-
-.form-container button {
-    width: 100%;
-    background: #228B22;
-    color: white;
-    font-weight: bold;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.form-container button:hover {
-    background: #2C3E50;
-    transform: scale(1.02);
-}
-
-.form-alert {
-    padding: 10px 15px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.form-alert.error {
-    background: #f8d7da;
-    color: #721c24;
-}
-</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>

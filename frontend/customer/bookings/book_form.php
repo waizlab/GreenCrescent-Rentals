@@ -2,7 +2,7 @@
 session_start();
 include '../../../backend/db/db_connect.php';
 
-// Check if user is logged in
+// book_form.php
 if (!isset($_SESSION['uid'])) {
     header("Location: ../../users/login.php");
     exit;
@@ -32,107 +32,35 @@ if (!$car) {
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/navbar.php'; ?>
-<div class="dashboard-container">
-    <h1>Book Car</h1>
 
-    <div class="form-container">
-        <h2><?= htmlspecialchars($car['make'] . ' ' . $car['model']); ?> (<?= htmlspecialchars($car['year']); ?>)</h2>
-        <p>Type: <?= htmlspecialchars(ucfirst($car['type'])); ?> | Price per day: <strong><?= $car['price_per_day']; ?> PKR</strong></p>
+<div class="container section">
+    <h1 class="text-center mb-2">Book Car</h1>
+
+    <div class="card form-card">
+        <h3 class="text-center"><?= htmlspecialchars($car['make'] . ' ' . $car['model']); ?> (<?= htmlspecialchars($car['year']); ?>)</h3>
+        <p class="text-center text-muted mb-3">
+            Type: <?= htmlspecialchars(ucfirst($car['type'])); ?> &middot;
+            Price per day: <strong class="mono" style="color:var(--accent);"><?= $car['price_per_day']; ?> PKR</strong>
+        </p>
 
         <form action="book_car.php" method="POST">
             <input type="hidden" name="car_id" value="<?= $car_id; ?>">
 
-            <label>Start Date <span>📅</span></label>
-            <input type="date" name="start_date" required>
+            <div class="field">
+                <label>Start Date</label>
+                <input type="date" name="start_date" required>
+            </div>
+            <div class="field">
+                <label>End Date</label>
+                <input type="date" name="end_date" required>
+            </div>
 
-            <label>End Date <span>📅</span></label>
-            <input type="date" name="end_date" required>
-
-            <button type="submit">🚗 Book Now</button>
+            <button type="submit" class="btn btn-primary" style="width:100%;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                Book Now
+            </button>
         </form>
     </div>
 </div>
-
-<style>
-.dashboard-container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 20px;
-    font-family: 'Lato', sans-serif;
-}
-
-.dashboard-container h1 {
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 28px;
-    color: #228B22;
-    margin-bottom: 25px;
-}
-
-.form-container {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
-
-.form-container h2 {
-    font-size: 22px;
-    color: #2E2E2E;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.form-container p {
-    font-size: 16px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.form-container label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: 14px;
-    color: #2E2E2E;
-}
-
-.form-container label span {
-    margin-left: 6px;
-}
-
-.form-container input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    border: 1px solid #B2BEB5;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: border 0.3s;
-}
-
-.form-container input:focus {
-    border-color: #228B22;
-    outline: none;
-}
-
-.form-container button {
-    width: 100%;
-    background: #228B22;
-    color: white;
-    font-weight: bold;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.form-container button:hover {
-    background: #2C3E50;
-    transform: scale(1.02);
-}
-</style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
