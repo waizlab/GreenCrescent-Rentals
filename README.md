@@ -437,7 +437,7 @@ docs/
 ![Customer Dashboard](docs/screenshots/customer-dashboard.png)
 
 ### Available Cars
-![Available Cars](docs/screenshots/available_cars.png.png)
+![Available Cars](docs/screenshots/available_cars.png)
 
 ### Admin Dashboard
 ![Admin Dashboard](docs/screenshots/admin-dashboard.png)
