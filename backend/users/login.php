@@ -1,6 +1,6 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/backend/db/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/backend/db/db_connect.php';
 
 $error = '';
 
@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role'] = $user['role'];
 
             if ($user['role'] === 'admin') {
-                header("Location: /GreenCrescent_Rentals/frontend/admin/dashboard.php");
+                header("Location: /frontend/admin/dashboard.php");
             } else {
-                header("Location: /GreenCrescent_Rentals/frontend/customer/dashboard.php");
+                header("Location: /frontend/customer/dashboard.php");
             }
             exit;
         }
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/header.php'; ?>
 
 <div class="container section">
     <div class="card form-card">
@@ -67,4 +67,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/footer.php'; ?>

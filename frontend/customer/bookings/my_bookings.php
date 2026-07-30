@@ -3,7 +3,7 @@ include '../../../backend/db/db_connect.php';
 include '../../../backend/auth/session_init.php';
 
 if ($_SESSION['role'] !== 'customer') {
-    header("Location: /GreenCrescent_Rentals/backend/users/login.php");
+    header("Location: /backend/users/login.php");
     exit;
 }
 
@@ -20,8 +20,8 @@ $stmt->execute();
 $result = $stmt->get_result();
 ?>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/navbar.php'; ?>
 
 <div class="container section">
     <h1 class="text-center mb-2">My Bookings</h1>
@@ -71,4 +71,4 @@ $result = $stmt->get_result();
     </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/footer.php'; ?>

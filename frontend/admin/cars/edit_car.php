@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/admin/common/navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/admin/common/navbar.php'; ?>
 
 <div class="container section">
     <h1 class="text-center mb-2">Edit Car Details</h1>
@@ -97,4 +97,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/footer.php'; ?>

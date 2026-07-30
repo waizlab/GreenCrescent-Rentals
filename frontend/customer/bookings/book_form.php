@@ -30,8 +30,8 @@ if (!$car) {
 }
 ?>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/navbar.php'; ?>
 
 <div class="container section">
     <h1 class="text-center mb-2">Book Car</h1>
@@ -63,4 +63,4 @@ if (!$car) {
     </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/footer.php'; ?>

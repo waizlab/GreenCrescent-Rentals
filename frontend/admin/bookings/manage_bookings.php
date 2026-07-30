@@ -14,8 +14,8 @@ $sql = "SELECT b.bid, u.name AS customer_name, u.email, c.carreg, c.make, c.mode
 $result = $conn->query($sql);
 ?>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/admin/common/navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/admin/common/navbar.php'; ?>
 
 <div class="container section">
     <h1 class="text-center mb-2">Manage Bookings</h1>
@@ -81,4 +81,4 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/footer.php'; ?>

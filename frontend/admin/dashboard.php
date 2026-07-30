@@ -17,8 +17,8 @@ $totalRevenueQuery = $conn->query("SELECT SUM(total_fare) as revenue FROM bookin
 $totalRevenue = $totalRevenueQuery->fetch_assoc()['revenue'] ?? 0;
 ?>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/admin/common/navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/admin/common/navbar.php'; ?>
 
 <div class="container section">
 
@@ -54,4 +54,4 @@ $totalRevenue = $totalRevenueQuery->fetch_assoc()['revenue'] ?? 0;
     </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/footer.php'; ?>

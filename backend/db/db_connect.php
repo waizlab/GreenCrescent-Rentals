@@ -1,20 +1,21 @@
 <?php
-// Database connection for GreenCrescent Rentals
-$servername = "localhost";   // MySQL server
-$username   = "root";        // MySQL username
-$password   = "";            // MySQL password (default XAMPP is blank)
-$dbname     = "GreenCrescent_Rentals"; // Database name
-$port       = "3306";          // MySQL port 
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname, $port);
+$servername = getenv('DB_HOST') ?: 'localhost';
+$username   = getenv('DB_USER') ?: 'root';
+$password   = getenv('DB_PASSWORD') ?: '';
+$dbname     = getenv('DB_NAME') ?: 'GreenCrescent_Rentals';
+$port       = getenv('DB_PORT') ?: '3306';
 
-// Check connection
+$conn = new mysqli(
+    $servername,
+    $username,
+    $password,
+    $dbname,
+    $port
+);
+
 if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
 }
 
-// Optional: Set charset
 $conn->set_charset("utf8");
-
-?>

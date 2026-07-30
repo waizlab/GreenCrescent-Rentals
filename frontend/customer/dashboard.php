@@ -6,7 +6,7 @@ if (!isset($_SESSION['uid']) || $_SESSION['role'] !== 'customer') {
 }
 // frontend/customer/dashboard.php
 ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/header.php'; ?>
 
 <div class="container section text-center">
     <h1>Customer Dashboard</h1>
@@ -24,4 +24,4 @@ if (!isset($_SESSION['uid']) || $_SESSION['role'] !== 'customer') {
     </div>
 </div>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/GreenCrescent_Rentals/frontend/common/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/frontend/common/footer.php'; ?>
